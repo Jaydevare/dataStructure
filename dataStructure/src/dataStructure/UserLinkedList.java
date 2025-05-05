@@ -9,6 +9,16 @@ class SinglyLinkedList
 		head = null;
 	}
 	
+	public IntNode getHead() 
+	{
+		return head;
+	}
+
+	public void setHead(IntNode head) 
+	{
+		this.head = head;
+	}
+
 	public void insertFirst(int d)
 	{
 		IntNode new_node = new IntNode(d);
@@ -114,6 +124,24 @@ class SinglyLinkedList
 		return;
 		}
 	
+	public void insertSorted(int d)
+	{
+		IntNode new_node = new IntNode(d);
+		if((head==null)||(head.getData()>d))
+		{
+			new_node.setNext(head);
+			head = new_node;
+			return;
+		}
+		IntNode iter = head;
+		while(iter.getNext()!=null && iter.getNext().getData()<d)
+			iter = iter.getNext();
+		
+		new_node.setNext(iter.getNext());
+		iter.setNext(new_node);
+		return;
+		}
+	
  	public int deleteFirst()
 	{
 		int d = -999;
@@ -152,6 +180,43 @@ class SinglyLinkedList
 		return d;
 	}
 
+	public int deleteBefore(int key)
+	{
+		int d = -999;
+		if(head==null)
+			return d;
+		if(head.getNext()==null)
+		{
+			d = head.getData();
+			head = null;
+			return d;
+		}
+		IntNode iter = head;
+		while(iter.getNext()!=null && iter.getNext().getNext().getData()!=key)
+			iter = iter.getNext();
+		
+		d = iter.getNext().getData();
+		iter.setNext(iter.getNext().getNext());
+		return d;
+		
+	}
+
+	public int 	deleteAfter(int key)
+	{
+		int d = -999;
+		if(head==null)
+		{
+			return d;
+		}
+		IntNode iter = head;
+		while(iter.getNext()!=null && iter.getData()!=key)
+			iter = iter.getNext();
+		
+		d = iter.getData();
+		iter.setNext(iter.getNext().getNext());
+		return d;
+	}
+	
 	public int deleteByPosition(int pos)
 	{
 		int d = -999;
@@ -224,24 +289,80 @@ class SinglyLinkedList
 			
 	}
 
+	public SinglyLinkedList LL_concat(SinglyLinkedList sll1)
+	{
+		SinglyLinkedList res = new SinglyLinkedList();
+		
+		IntNode iter1 = this.head;
+		while(iter1!=null)
+		{
+			res.insertLast(iter1.getData());
+			iter1= iter1.getNext();
+		}
+		
+		IntNode iter2 = sll1.getHead();
+		
+		while(iter2!=null)
+		{
+			res.insertLast(iter2.getData());
+			iter2= iter2.getNext();
+		}
+		return res;
+	}
+	
+	public void reverseSLL()
+	{
+		IntNode curr = head;
+		IntNode prev = null;
+		IntNode next;
+		
+		while(curr!=null)
+		{
+			next = curr.getNext();
+			curr.setNext(prev);
+			prev = curr;
+			curr = next;
+		}
+		head=prev;
+	}
 }
 
 public class UserLinkedList{
 	public static void main(String[] args)
 	{
 		SinglyLinkedList sll = new SinglyLinkedList();
-		sll.insertFirst(10);
-		sll.insertLast(99);
-		sll.insertByPosition(20, 2);
-		sll.insertBefore(15, 20);
-		sll.insertAfter(30, 10);
-		sll.insertBefore(16, 30);
+		SinglyLinkedList sll1 = new SinglyLinkedList();
+//		sll.insertFirst(10);
+//		sll.insertLast(99);
+//		sll.insertByPosition(20, 2);
+//		sll.insertBefore(15, 20);
+//		sll.insertAfter(30, 10);
+//		sll.insertSorted(12);
+//		sll.insertBefore(16, 30);
+//		sll.display();
+//		sll.count();
+//		sll.deleteFirst();
+//		sll.deleteLast();
+//		sll.deleteByPosition(4);
+//		sll.deleteBefore(99);
+//		sll.deleteAfter(30);
+//		sll.display();
+//		sll.count();
+//		sll.reverseSLL();
+		sll.insertSorted(10);
+		sll.insertSorted(20);
+		sll.insertSorted(30);
+		sll.insertSorted(40);
+		sll1.insertSorted(50);
+		sll1.insertSorted(60);
+		sll1.insertSorted(70);
+		sll1.insertSorted(80);
 		sll.display();
-		sll.count();
-		sll.deleteFirst();
-		sll.deleteLast();
-		sll.deleteByPosition(4);
-		sll.display();
-		sll.count();
+		System.out.println("=============================");
+		sll1.display();
+		SinglyLinkedList list =  sll.LL_concat(sll1);
+		
+		
+		
 	}
 }
