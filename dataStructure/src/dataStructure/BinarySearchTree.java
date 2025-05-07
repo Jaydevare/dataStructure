@@ -9,4 +9,13 @@ public class BinarySearchTree
 		this.root = root;
 	}
 	
+	public void insert_nonrec(int d)
+	{
+		if(root == null)
+		{
+			root = new_node;
+			return;
+		}
+		
+	}
 }
