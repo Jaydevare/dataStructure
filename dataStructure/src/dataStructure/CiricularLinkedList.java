@@ -139,15 +139,16 @@ public class CiricularLinkedList
 			System.out.println("List is Empty");
 			return d;
 		}
-		if(last.getNext()==last)
-		{
-			d = last.getData();
-			last.setNext(null);
-			last = null;
-			return d;
-		}
+		
 		if(pos == 1)
 		{
+			if(last.getNext()==last)
+			{
+				d = last.getData();
+				last.setNext(null);
+				last = null;
+				return d;
+			}
 			d = last.getNext().getData();
 			last.setNext(last.getNext().getNext());
 			return d;
