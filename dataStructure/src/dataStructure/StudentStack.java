@@ -34,7 +34,7 @@ public class StudentStack {
 		public Student pop()
 		{
 			//System.out.println("thstrh");
-			StudentStack d = null;
+			Student d = null;
 			if(top == -1)
 			{
 				System.out.println("Stack is Empty");
@@ -80,10 +80,6 @@ public class StudentStack {
 			}
 		}
 		
-	}
-
-	public class MyStudentStack
-	{
 		public static void main(String[] args)
 		{
 			StudentStack s1 = new StudentStack(6);
@@ -126,4 +122,9 @@ public class StudentStack {
 		}
 		
 	}
+
+		
+		
+		
+
 

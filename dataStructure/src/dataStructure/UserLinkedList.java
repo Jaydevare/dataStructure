@@ -348,7 +348,7 @@ public class UserLinkedList{
 //		sll.deleteAfter(30);
 //		sll.display();
 //		sll.count();
-//		sll.reverseSLL();
+		
 		sll.insertSorted(10);
 		sll.insertSorted(20);
 		sll.insertSorted(30);
@@ -357,8 +357,10 @@ public class UserLinkedList{
 		sll1.insertSorted(60);
 		sll1.insertSorted(70);
 		sll1.insertSorted(80);
+		sll.reverseSLL();
 		sll.display();
 		System.out.println("=============================");
+		sll1.reverseSLL();
 		sll1.display();
 		SinglyLinkedList list =  sll.LL_concat(sll1);
 		
