@@ -310,6 +310,7 @@ class SinglyLinkedList
 		return res;
 	}
 	
+	
 	public void reverseSLL()
 	{
 		IntNode curr = head;
@@ -362,8 +363,10 @@ public class UserLinkedList{
 		System.out.println("=============================");
 		sll1.reverseSLL();
 		sll1.display();
-		SinglyLinkedList list =  sll.LL_concat(sll1);
+		System.out.println();
 		
+		SinglyLinkedList res = sll.LL_concat(sll1);
+		res.display();
 		
 		
 	}
