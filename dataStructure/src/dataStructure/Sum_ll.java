@@ -276,6 +276,32 @@ public class Sum_ll
 		
 		System.out.println(sum);
 	}
+	
+	public void deleteMiddle() {
+	    if (head == null || head.next == null) {
+	        head = null;
+	        return;
+	    }
+
+	    // Step 1: Count the total nodes
+	    int count = 0;
+	    IntNode temp = head;
+	    while (temp != null) {
+	        count++;
+	        temp = temp.getNext();
+	    }
+
+	    int mid = count / 2;
+
+	    // Step 2: Traverse to the node before middle
+	    IntNode prev = head;
+	    for (int i = 1; i < mid; i++) {
+	        prev = prev.getNext();
+	    }
+
+	    // Step 3: Delete middle node
+	    prev.setNext(prev.getNext().getNext());
+	}
 
 	
 	public static void main(String[] args)
@@ -324,3 +350,73 @@ public class Sum_ll
 		
 	}
 }
+
+class Node {
+    int data;
+    Node next;
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class LinkedListSplit {
+    Node head;
+
+    // Function to split the list
+    public void splitList() {
+        if (head == null || head.next == null) {
+            System.out.println("Cannot split. List too small.");
+            return;
+        }
+
+        Node slow = head;
+        Node fast = head;
+        Node prev = null;
+
+        // Move fast by 2 and slow by 1
+        while (fast != null && fast.next != null) {
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // First half: head to prev
+        // Second half: slow to end
+        prev.next = null;
+
+        System.out.println("First half:");
+        printList(head);
+
+        System.out.println("Second half:");
+        printList(slow);
+    }
+
+    // Helper to add node
+    public void add(int data) {
+        Node newNode = new Node(data);
+        if (head == null) head = newNode;
+        else {
+            Node temp = head;
+            while (temp.next != null) temp = temp.next;
+            temp.next = newNode;
+        }
+    }
+
+    // Helper to print list
+    public void printList(Node node) {
+        while (node != null) {
+            System.out.print(node.data + " ");
+            node = node.next;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        LinkedListSplit list = new LinkedListSplit();
+        for (int i = 1; i <= 7; i++) list.add(i);
+        list.splitList();
+    }
+}
+
+
